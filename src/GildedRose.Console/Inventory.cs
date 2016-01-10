@@ -11,11 +11,13 @@ namespace GildedRose.Console
         {
             foreach (var item in Items)
             {
-                if (!IsAgedBrie(item) && !IsBackstagePass(item))
+                var itemName = item.Name;
+
+                if (!IsMaturing(itemName) && !IsDeadlined(itemName))
                 {
                     if (item.Quality > 0)
                     {
-                        if (!IsLegendary(item))
+                        if (!IsLegendary(item.Name))
                         {
                             item.Quality = item.Quality - 1;
                         }
@@ -27,7 +29,7 @@ namespace GildedRose.Console
                     {
                         item.Quality = item.Quality + 1;
 
-                        if (IsBackstagePass(item))
+                        if (IsDeadlined(itemName))
                         {
                             if (item.SellIn < 11)
                             {
@@ -48,20 +50,20 @@ namespace GildedRose.Console
                     }
                 }
 
-                if (!IsLegendary(item))
+                if (!IsLegendary(itemName))
                 {
                     item.SellIn = item.SellIn - 1;
                 }
 
                 if (item.SellIn < 0)
                 {
-                    if (!IsAgedBrie(item))
+                    if (!IsMaturing(itemName))
                     {
-                        if (!IsBackstagePass(item))
+                        if (!IsDeadlined(itemName))
                         {
                             if (item.Quality > 0)
                             {
-                                if (!IsLegendary(item))
+                                if (!IsLegendary(itemName))
                                 {
                                     item.Quality = item.Quality - 1;
                                 }
@@ -83,21 +85,26 @@ namespace GildedRose.Console
             }
         }
 
-        private bool IsAgedBrie(Item item)
+        private bool IsMaturing(string itemName)
         {
             // includes all items that increase in quality as they increase in age
-            return item.Name == "Aged Brie";
+            return itemName == "Aged Brie";
         }
 
-        private bool IsLegendary(Item item)
+        private bool IsLegendary(string itemName)
         {
             // includes all items that never have to be sold and never decrease in quality
-            return item.Name == "Sulfuras, Hand of Ragnaros";
+            return itemName == "Sulfuras, Hand of Ragnaros";
         }
 
-        private bool IsBackstagePass(Item item)
+        private bool IsDeadlined(string itemName)
         {
-            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
+            return itemName == "Backstage passes to a TAFKAL80ETC concert";
+        }
+
+        private bool IsConjured(string itemName)
+        {
+            return itemName == "Conjured Mana Cake";
         }
     }
 

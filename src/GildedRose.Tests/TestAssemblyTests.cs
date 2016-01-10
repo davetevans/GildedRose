@@ -59,17 +59,15 @@ namespace GildedRose.Tests
         [Fact]
         public void item_quality_is_never_negative()
         {
+            FullInventory.Items[0].Quality = 0;
             FullInventory.UpdateQuality();
 
-            foreach (var item in FullInventory.Items)
-            {
-                Assert.True(item.Quality >= 0);
-            }
+            Assert.True(FullInventory.Items[0].Quality == 0);
         }
 
         //"Aged Brie" actually increases in Quality the older it gets
         [Fact]
-        public void Aged_Brie_Quality_increases_as_gets_older()
+        public void maturing_item_Quality_increases_as_gets_older()
         {
             var initialQuality = FullInventory.Items[1].Quality;
 
@@ -80,7 +78,7 @@ namespace GildedRose.Tests
 
         //The Quality of an item is never more than 50
         [Fact]
-        public void Aged_Brie_Quality_is_never_more_then_50()
+        public void maturing_item_Quality_is_never_more_then_50()
         {
             FullInventory.Items[1].Quality = 50;
             FullInventory.UpdateQuality();
@@ -114,7 +112,7 @@ namespace GildedRose.Tests
         //value approaches; Quality increases by 2 when there are 10 days or less
         //and by 3 when there are 5 days or less but Quality drops to 0 after the concert
         [Fact]
-        public void Backstage_Passes_Quality_increases_by_1_when_SellIn_greater_than_10()
+        public void deadlined_items_Quality_increases_by_1_when_SellIn_greater_than_10()
         {
             var initialQuality = FullInventory.Items[4].Quality;
             FullInventory.Items[4].SellIn = 11;
@@ -128,7 +126,7 @@ namespace GildedRose.Tests
         //value approaches; Quality increases by 2 when there are 10 days or less
         //and by 3 when there are 5 days or less but Quality drops to 0 after the concert
         [Fact]
-        public void Backstage_Passes_Quality_increases_by_2_when_SellIn_less_than_or_equal_to_10_but_greater_than_5()
+        public void deadlined_items_Quality_increases_by_2_when_SellIn_less_than_or_equal_to_10_but_greater_than_5()
         {
             var initialQuality = FullInventory.Items[4].Quality;
             FullInventory.Items[4].SellIn = 10;
@@ -142,7 +140,7 @@ namespace GildedRose.Tests
         //value approaches; Quality increases by 2 when there are 10 days or less
         //and by 3 when there are 5 days or less but Quality drops to 0 after the concert
         [Fact]
-        public void Backstage_Passes_Quality_increases_by_3_when_SellIn_less_than_or_equal_to_5_but_greater_than_0()
+        public void deadlined_items_Quality_increases_by_3_when_SellIn_less_than_or_equal_to_5_but_greater_than_0()
         {
             var initialQuality = FullInventory.Items[4].Quality;
             FullInventory.Items[4].SellIn = 5;
@@ -156,7 +154,7 @@ namespace GildedRose.Tests
         //value approaches; Quality increases by 2 when there are 10 days or less
         //and by 3 when there are 5 days or less but Quality drops to 0 after the concert
         [Fact]
-        public void Backstage_Passes_Quality_equals_0_when_SellIn_less_than_or_equal_to_0()
+        public void deadlined_items_Quality_equals_0_when_SellIn_less_than_or_equal_to_0()
         {
             FullInventory.Items[4].SellIn = 0;
             FullInventory.UpdateQuality();
