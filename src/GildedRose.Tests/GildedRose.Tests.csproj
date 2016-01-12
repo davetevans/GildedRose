@@ -57,7 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestAssemblyTests.cs" />
+    <Compile Include="MaturingItemTests.cs" />
+    <Compile Include="LegendaryItemTests.cs" />
+    <Compile Include="DeadlinedItemTests.cs" />
+    <Compile Include="ConjuredItemTests.cs" />
+    <Compile Include="TestItems.cs" />
+    <Compile Include="StandardItemTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
