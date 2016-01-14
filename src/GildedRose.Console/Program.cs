@@ -21,7 +21,12 @@ namespace GildedRose.Console
             foreach (var item in Items)
             {
                 var i = SalesItemFactory.Create(item);
+
+                //System.Console.WriteLine(string.Format("BEFORE UPDATE - Type: {0}, Name: {1}, SellIn: {2}, Quality: {3}", i.GetType().Name, i.Name, i.SellIn, i.Quality));
+
                 i.UpdateQuality();
+
+                //System.Console.WriteLine(string.Format("AFTER UPDATE  - Type: {0}, Name: {1}, SellIn: {2}, Quality: {3}\r\n", i.GetType().Name, i.Name, i.SellIn, i.Quality));
             }
 
             System.Console.ReadKey();

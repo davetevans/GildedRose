@@ -6,30 +6,25 @@
         {
             if (IsMaturing(item))
             {
-                return new StandardItem(item);
-            }
-
-            if (IsMaturing(item))
-            {
-                return new MaturingItem(item);
+                return new MaturingSalesItem(item);
             }
 
             if (IsLegendary(item))
             {
-                return new LegendaryItem(item);
+                return new LegendarySalesItem(item);
             }
 
             if (IsDeadlined(item))
             {
-                return new DeadlinedItem(item);
+                return new DeadlinedSalesItem(item);
             }
 
             if (IsConjured(item))
             {
-                return new ConjuredItem(item);
+                return new ConjuredSalesItem(item);
             }
 
-            return new StandardItem(item);
+            return new StandardSalesItem(item);
         }
 
         private static bool IsMaturing(Item item)
@@ -52,140 +47,6 @@
         private static bool IsConjured(Item item)
         {
             return item.Name == "Conjured Mana Cake";
-        }
-    }
-
-    public class StandardItem : SalesItem
-    {
-        public StandardItem(Item item) : base(item)
-        {
-        }
-
-        public override void UpdateItemQuality()
-        {
-            if (Quality > 0)
-            {
-                Quality = Quality - 1;
-            }
-        }
-
-        public override void UpdateItemSellIn()
-        {
-            SellIn = SellIn - 1;
-        }
-
-        public override void UpdateExpiredItemQuality()
-        {
-            if (Quality > 0)
-            {
-                Quality = Quality - 1;
-            }
-        }
-    }
-
-    public class MaturingItem : SalesItem
-    {
-        public MaturingItem(Item item) : base(item)
-        {
-        }
-
-        public override void UpdateItemQuality()
-        {
-            if (Quality < MaxItemQuantity)
-            {
-                Quality = Quality + 1;
-            }
-        }
-
-        public override void UpdateItemSellIn()
-        {
-            SellIn = SellIn - 1;
-        }
-
-        public override void UpdateExpiredItemQuality()
-        {
-            if (Quality < MaxItemQuantity)
-            {
-                Quality = Quality + 1;
-            }
-        }
-    }
-
-    public class LegendaryItem : SalesItem
-    {
-        public LegendaryItem(Item item) : base(item)
-        {
-        }
-
-        public override void UpdateItemQuality()
-        {
-        }
-
-        public override void UpdateExpiredItemQuality()
-        {
-        }
-    }
-
-    public class DeadlinedItem : SalesItem
-    {
-        public DeadlinedItem(Item item) : base(item)
-        {
-        }
-
-        public override void UpdateItemQuality()
-        {
-            if (Quality < MaxItemQuantity)
-            {
-                Quality = Quality + 1;
-
-                if (SellIn < 11)
-                {
-                    Quality = Quality + 1;
-                }
-
-                if (SellIn < 6)
-                {
-                    Quality = Quality + 1;
-                }
-            }
-        }
-
-        public override void UpdateItemSellIn()
-        {
-            SellIn = SellIn - 1;
-        }
-
-        public override void UpdateExpiredItemQuality()
-        {
-            Quality = 0;
-        }
-    }
-
-    public class ConjuredItem : SalesItem
-    {
-        public ConjuredItem(Item item) : base(item)
-        {
-        }
-
-        public override void UpdateItemQuality()
-        {
-            if (Quality > 0)
-            {
-                Quality = Quality - 2;
-            }
-        }
-
-        public override void UpdateItemSellIn()
-        {
-            SellIn = SellIn - 1;
-        }
-
-        public override void UpdateExpiredItemQuality()
-        {
-            if (Quality > 0)
-            {
-                Quality = Quality - 2;
-            }
         }
     }
 }
